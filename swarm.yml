@@ -1,0 +1,25 @@
+# version: '3'
+# services:
+#   nodejs-app:
+#     image: web1
+#     ports:
+#       - "80:80"
+#     deploy:
+#       replicas: 3 
+
+
+version: '3'
+
+services:
+  app:
+    image: nombre-de-tu-imagen:tag # Reemplaza con el nombre de la imagen y etiqueta que desees
+    ports:
+      - "80:80" # Mapea el puerto 80 del contenedor al puerto 80 del host
+    volumes:
+      - ./app:/app # Reemplaza /ruta/local/a/tu/aplicacion con la ruta local de tu aplicación
+    deploy:
+      replicas: 4 # Especifica el número de réplicas (contenedores) que deseas
+      restart_policy:
+        condition: on-failure
+
+# Agrega aquí más configuración si es necesario (redes, volúmenes, etc.)
