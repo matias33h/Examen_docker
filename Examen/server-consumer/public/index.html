@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+  <title>Aplicación Consumidora</title>
+</head>
+<body>
+  <h1>Aplicación Consumidora de Servicios Web</h1>
+  <!-- Formulario para insertar un perfil -->
+  <form id="insertar-form">
+    <input type="text" id="nomUsuario" placeholder="Nombre de Usuario" required>
+    <select id="perfil">
+      <option value="Cajero">Cajero</option>
+      <option value="Administrador">Administrador</option>
+      <option value="Repositor">Repositor</option>
+    </select>
+    <select id="activo">
+      <option value="1">Sí</option>
+      <option value="0">No</option>
+    </select>
+    <button type="submit">Insertar con REST</button>
+  </form>
+
+  <!-- Formulario para consultar un perfil -->
+  <form id="consultar-form">
+    <!-- <input type="text" id="consultaNomUsuario" placeholder="Nombre de Usuario para consultar" required> -->
+    <button type="submit">Consultar con SOAP</button>
+  </form>
+  
+  <!-- Tabla para mostrar los registros -->
+  <div class="table-container">
+    <table>
+      <caption>Lista con SOAP</caption>
+      <thead>
+        <tr>
+          <th>Usuario</th>
+          <th>Perfil</th>
+          <th>Activo</th>
+        </tr>
+      </thead>
+      <tbody id="perfilTableBody">
+        <!-- Los registros se agregarán aquí -->
+      </tbody>
+    </table>
+  </div>
+  
+  <div id="response"></div>
+
+  <!-- Aquí puedes agregar elementos para mostrar los resultados -->
+
+  <script src="app.js"></script> <!-- Tu código JavaScript -->
+</body>
+</html>

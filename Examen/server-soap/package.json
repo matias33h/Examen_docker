@@ -1,0 +1,20 @@
+{
+  "name": "server-soap",
+  "version": "1.0.0",
+  "description": "",
+  "main": "soapServer.js",
+  "scripts": {
+    "start": "node soapServer.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "fs": "^0.0.1-security",
+    "http": "^0.0.1-security",
+    "mysql": "^2.18.1",
+    "soap": "^1.0.0",
+    "strong-soap": "^3.5.6"
+  }
+}

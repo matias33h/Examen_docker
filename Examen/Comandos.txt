@@ -1,0 +1,45 @@
+Entrar a la carpeta './Examen'.
+
+Para probar individualmente los contenedores
+
+
+paso 1# - Construye la imagen y corre el contenedor de MySQL con los siguientes comandos:
+
+docker build -t mi-mysql-db ./db
+docker run -d -p 3307:3306 --network my-network --name mysql-db mi-mysql-db
+
+
+
+paso 2#- Construye y corre el servicio REST:
+
+docker build -t server-rest ./server-rest
+docker run -d -p 5050:8080 --network my-network --name rest-api mi-rest-api
+
+
+
+paso 3#- Construya la imagen del servicio SOAP con el siguiente comando:
+
+docker build -t server-soap ./server-soap
+docker run -d -p 8080:8080 --network my-network --name soap-api mi-soap-api
+
+
+paso 4#- Construya la imagen de la aplicación consumidora con el siguiente comando:
+
+docker build -t server-consumer ./server-consumer
+docker run -d -p 3001:3000 --network my-network --name consumer-app mi-consumer-app
+
+Para probar con swarm:
+
+Construir todas las imagenes:
+docker build -t mi-mysql-db ./db
+docker build -t server-rest ./server-rest
+docker build -t server-soap ./server-soap
+docker build -t server-consumer ./server-consumer
+
+Correr el cluster:
+
+docker swarm init
+
+docker stack deploy -c docker-compose.yml mi-stack
+
+entrar en localhost:3001

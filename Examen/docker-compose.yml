@@ -1,0 +1,53 @@
+version: '3.8'
+
+services:
+  mysql-db:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: 'root'
+    networks:
+      - mynetwork
+    deploy:
+      replicas: 1
+      placement:
+        constraints: [node.role == manager]
+    volumes:
+      - ./db/create_table.sql:/docker-entrypoint-initdb.d/create_table.sql
+
+  rest-api:
+    image: server-rest
+    ports:
+      - "5050:8080" # Redirige el puerto 5050 al puerto 8080 en el contenedor
+    networks:
+      - mynetwork
+    deploy:
+      replicas: 1
+    depends_on:
+      - mysql-db
+
+  soap-api:
+    image: server-soap
+    ports:
+      - "5555:8080" # Redirige el puerto 5555 al puerto 8000 en el contenedor
+    networks:
+      - mynetwork
+    deploy:
+      replicas: 1
+    depends_on:
+      - mysql-db
+
+  consumer-api:
+    image: server-consumer
+    ports:
+      - "3001:3000"
+    networks:
+      - mynetwork
+    deploy:
+      replicas: 4
+    depends_on:
+      - server-rest
+      - server-soap
+
+networks:
+  mynetwork:
+    driver: overlay

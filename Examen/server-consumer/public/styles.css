@@ -1,0 +1,38 @@
+/* Estilo para la tabla */
+.table-container {
+    margin: 20px; /* Margen alrededor de la tabla */
+    border: 1px solid #ccc; /* Borde alrededor de la tabla */
+    border-radius: 5px; /* Bordes redondeados */
+    overflow: auto; /* Barra de desplazamiento si la tabla es grande */
+  }
+  
+  table {
+    width: 100%; /* Ancho completo de la tabla */
+    border-collapse: collapse; /* Colapsar bordes */
+  }
+  
+  caption {
+    font-size: 1.5em; /* Tamaño de fuente para el título de la tabla */
+    background-color: #f0f0f0; /* Color de fondo para el título */
+    padding: 10px; /* Espaciado interior para el título */
+    border-bottom: 1px solid #ccc; /* Borde inferior para el título */
+  }
+  
+  th, td {
+    padding: 10px; /* Espaciado interior para celdas */
+    text-align: left; /* Alineación de texto izquierda */
+  }
+  
+  thead {
+    background-color: #f0f0f0; /* Color de fondo para el encabezado */
+  }
+  
+  th {
+    font-weight: bold; /* Texto en negrita para encabezados */
+    border-bottom: 2px solid #ccc; /* Borde inferior más grueso para encabezados */
+  }
+  
+  tbody tr:nth-child(even) {
+    background-color: #f2f2f2; /* Fondo alternado para filas pares */
+  }
+  

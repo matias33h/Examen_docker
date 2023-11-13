@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" 
+                  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" 
+                  xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+                  xmlns:soap-enc="http://schemas.xmlsoap.org/soap/encoding/" 
+                  xmlns:tns="http://example.com/perfiles.wsdl" 
+                  targetNamespace="http://example.com/perfiles.wsdl">
+
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://example.com/perfiles.wsdl">
+      <!-- Elemento existente para consultar un perfil -->
+      <xsd:element name="consultarPerfilRequest">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="nomUsuario" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="consultarPerfilResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="perfil" type="xsd:string"/>
+            <xsd:element name="activo" type="xsd:boolean"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+
+      <!-- Nuevos elementos para consultar todos los perfiles -->
+      <xsd:element name="consultarTodosLosPerfilesRequest">
+        <xsd:complexType/>
+      </xsd:element>
+      <xsd:element name="consultarTodosLosPerfilesResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="perfiles" type="xsd:string" maxOccurs="unbounded"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:schema>
+  </wsdl:types>
+
+  <!-- Mensajes para la operación existente -->
+  <wsdl:message name="consultarPerfilRequest">
+    <wsdl:part name="parameters" element="tns:consultarPerfilRequest"/>
+  </wsdl:message>
+  <wsdl:message name="consultarPerfilResponse">
+    <wsdl:part name="parameters" element="tns:consultarPerfilResponse"/>
+  </wsdl:message>
+
+  <!-- Mensajes para la nueva operación -->
+  <wsdl:message name="consultarTodosLosPerfilesRequest">
+    <wsdl:part name="parameters" element="tns:consultarTodosLosPerfilesRequest"/>
+  </wsdl:message>
+  <wsdl:message name="consultarTodosLosPerfilesResponse">
+    <wsdl:part name="parameters" element="tns:consultarTodosLosPerfilesResponse"/>
+  </wsdl:message>
+
+  <!-- PortType con operaciones -->
+  <wsdl:portType name="PerfilesPortType">
+    <!-- Operación existente -->
+    <wsdl:operation name="consultarPerfil">
+      <wsdl:input message="tns:consultarPerfilRequest"/>
+      <wsdl:output message="tns:consultarPerfilResponse"/>
+    </wsdl:operation>
+
+    <!-- Nueva operación para consultar todos los perfiles -->
+    <wsdl:operation name="consultarTodosLosPerfiles">
+      <wsdl:input message="tns:consultarTodosLosPerfilesRequest"/>
+      <wsdl:output message="tns:consultarTodosLosPerfilesResponse"/>
+    </wsdl:operation>
+  </wsdl:portType>
+
+  <!-- Bindings -->
+  <wsdl:binding name="PerfilesBinding" type="tns:PerfilesPortType">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    
+    <!-- Binding para la operación existente -->
+    <wsdl:operation name="consultarPerfil">
+      <soap:operation soapAction="http://example.com/consultarPerfil"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+
+    <!-- Binding para la nueva operación -->
+    <wsdl:operation name="consultarTodosLosPerfiles">
+      <soap:operation soapAction="http://example.com/consultarTodosLosPerfiles"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+
+  <!-- Servicio -->
+  <wsdl:service name="PerfilesService">
+    <wsdl:port name="PerfilesPort" binding="tns:PerfilesBinding">
+      <soap:address location="http://soap-api:8080/consultar_con_soap"/>
+    </wsdl:port>
+  </wsdl:service>
+
+</wsdl:definitions>
